@@ -29,8 +29,6 @@ exports.addStore = (req, res) => {
 exports.upload = multer(multerOptions).single('photo');
 
 exports.resize = async (req, res, next) => {
-  console.log(req.file);
-
   if (!req.file) {
     next();
     return;
@@ -38,8 +36,6 @@ exports.resize = async (req, res, next) => {
 
   const extension = req.file.mimetype.split('/')[1];
   req.body.photo = `${uuid.v4()}.${extension}`;
-
-  console.log(req.body.photo);
 
   const photo = await  jimp.read(req.file.buffer);
   await photo.resize(800, jimp.AUTO);
