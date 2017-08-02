@@ -790,7 +790,7 @@ label {
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
 
 .tags {
-  margin: 0;
+  margin: 10px 0 0 0;
   padding: 0;
   list-style: none;
   display: -ms-flexbox;

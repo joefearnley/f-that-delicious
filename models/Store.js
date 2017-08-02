@@ -31,7 +31,17 @@ const storeSchema = new mongoose.Schema({
       type: String,
       required: 'You must supply an address!!'
     }
+  },
+  photo: String
+});
+
+storeSchema.pre('save', function(next) {
+  if (!this.isModified('name')) {
+    next();
+    return;
   }
+  this.slug = slug(this.name);
+  next();
 });
 
 module.exports = mongoose.model('Store', storeSchema);
