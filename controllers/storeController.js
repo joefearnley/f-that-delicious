@@ -3,6 +3,7 @@ const Store = mongoose.model('Store');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
+const slug = require('slugs');
 
 const multerOptions = {
   storage: multer.memoryStorage(),
@@ -69,6 +70,7 @@ exports.editStore = async (req, res) => {
 
 exports.updateStore = async (req, res) => {
   req.body.location.type = 'Point';
+  req.body.slug = slug(req.body.name);
 
   const store = await Store.findOneAndUpdate(
     {  _id: req.params.id }, 
