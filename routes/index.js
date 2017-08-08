@@ -2,11 +2,15 @@ const express = require('express');
 const router = express.Router();
 const storeContoller = require('../controllers/storeController');
 const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers')
 
 router.get('/', catchErrors(storeContoller.getStores));
 router.get('/stores', catchErrors(storeContoller.getStores));
-router.get('/add', storeContoller.addStore);
+router.get('/add', 
+  authController.isLoggedIn,
+  storeContoller.addStore
+);
 router.post('/add', 
   storeContoller.upload, 
   catchErrors(storeContoller.resize),
@@ -23,7 +27,13 @@ router.get('/tags', catchErrors(storeContoller.getStoresByTag));
 router.get('/tags/:tag', catchErrors(storeContoller.getStoresByTag));
 
 router.get('/login', userController.loginForm);
+router.post('/login', authController.login);
 router.get('/register', userController.registerForm);
-router.post('/register', userController.validateRegister);
+router.post('/register',
+  userController.validateRegister,
+  userController.register,
+  authController.login
+);
+router.get('/logout', authController.logout);
 
 module.exports = router;
