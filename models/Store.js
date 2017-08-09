@@ -30,6 +30,12 @@ const storeSchema = new mongoose.Schema({
     address: {
       type: String,
       required: 'You must supply an address!'
+    }, 
+    photo: String,
+    author: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: 'You must supply an author'
     }
   }
 });
@@ -57,23 +63,6 @@ storeSchema.statics.getTagsList = function() {
     { $group: { _id: '$tags', count: { $sum: 1 } } },
     { $sort: { count: -1 } }
   ]);
-}
-
-// storeSchema.pre('findOneAndUpdate', async function(next) {
-//   const store = await this.findOne({})
-//   if(!this._update.name || store.name === this._update.name) {
-//     return next()
-//   }
-
-//   let   storeSlug = slug(this._update.name)
-//   const slugRegEx = new RegExp(`^(${storeSlug})((-[0-9]*$)?)$`, 'i')
-//   const storesWithSlug = await Store.find({slug: slugRegEx})
-
-//   if(storesWithSlug.length) storeSlug = `${storeSlug}-${storesWithSlug.length + 1}`
-
-//   const newSlug = promisify(this.update({}, { slug: storeSlug }), this)
-//   await newSlug
-//   next()
-// });
+};
 
 module.exports = mongoose.model('Store', storeSchema);
