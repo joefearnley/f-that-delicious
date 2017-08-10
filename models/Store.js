@@ -31,12 +31,12 @@ const storeSchema = new mongoose.Schema({
       type: String,
       required: 'You must supply an address!'
     }, 
-    photo: String,
-    author: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: 'You must supply an author'
-    }
+  },
+  photo: String,
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: 'You must supply an author'
   }
 });
 
