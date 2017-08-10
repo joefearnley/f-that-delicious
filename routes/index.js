@@ -22,6 +22,7 @@ router.post('/add/:id',
   catchErrors(storeContoller.updateStore)
 );
 router.get('/stores/:id/edit', catchErrors(storeContoller.editStore));
+router.get('/store/:slug', catchErrors(storeContoller.getStoreBySlug));
 router.get('/stores/:slug', catchErrors(storeContoller.getStoreBySlug));
 router.get('/tags', catchErrors(storeContoller.getStoresByTag));
 router.get('/tags/:tag', catchErrors(storeContoller.getStoresByTag));
@@ -44,6 +45,9 @@ router.post('/account/reset/:token',
   catchErrors(authController.update)
 );
 
+router.get('/map', storeContoller.mapPage);
+
 router.get('/api/search', catchErrors(storeContoller.seachStores));
+router.get('/api/stores/near', catchErrors(storeContoller.mapStores));
 
 module.exports = router;
