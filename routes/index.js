@@ -25,6 +25,7 @@ router.post('/add/:id',
 router.get('/stores/:id/edit', catchErrors(storeContoller.editStore));
 router.get('/store/:slug', catchErrors(storeContoller.getStoreBySlug));
 router.get('/stores/:slug', catchErrors(storeContoller.getStoreBySlug));
+router.get('/stores/page/:page', catchErrors(storeContoller.getStores));
 router.get('/tags', catchErrors(storeContoller.getStoresByTag));
 router.get('/tags/:tag', catchErrors(storeContoller.getStoresByTag));
 
