@@ -23,8 +23,7 @@ block content
                 span.tag__text  ##{tag}
       if user
         +reviewForm(store)
-      p= h.dump(store)
-      if views
+      if store.reviews
         .reviews
           each review in store.reviews
             .review
